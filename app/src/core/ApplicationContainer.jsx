@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
+
+import { getAuthorization } from '../redux/modules/authorization/authorization.reducer';
 
 import Application from './Application';
 
-class ApplicationContainer extends React.Component {
+class ApplicationContainer extends PureComponent {
+  componentDidMount() {
+    this.props.getAuthorization();
+  }
+
   render() {
     return (
-      <Application { ...this.props } />
+      <Application {...this.props} />
     );
   }
 }
@@ -15,16 +23,15 @@ const mapStateToProps = (state) => (
   state
 );
 
-const mapDispatchToProps = (dispatch) => ({
-  addCounter() {
-    dispatch({ type: 'ADD_COUNTER', value: 1 });
-  },
-  subCounter() {
-    dispatch({ type: 'SUB_COUNTER', value: 1 });
-  },
-  saveCounter(value) {
-    dispatch({ type: 'SAVE_COUNTER', value });
-  },
+const mapDispatchToProps = ({
+  getAuthorization,
 });
+
+ApplicationContainer.defaultProps = {};
+
+ApplicationContainer.propTypes = {
+  getAuthorization: PropTypes.func.isRequired,
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationContainer);

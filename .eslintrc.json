@@ -1,8 +1,8 @@
 {
-	"extends": ["airbnb"],
+  "extends": ["airbnb"],
   "plugins": ["react", "jsx-a11y", "import"],
-	"env": { "node": true, "browser": true, "mocha": true },
-	"rules": {
+  "env": { "node": true, "browser": true, "mocha": true },
+  "rules": {
     "max-len": ["error", { "code": 150, "ignoreComments": true }],
     "jsx-a11y/href-no-hash": 0,
     "no-use-before-define": 0,
@@ -11,6 +11,6 @@
     "arrow-parens": ["error", "always"],
     "jsx-a11y/anchor-is-valid": [
       "error", { "components": ["Link"], "specialLink": ["to"] }
-		]
-	}
+   ]
+  }
 }

@@ -1,33 +1,15 @@
-const initialState = {
-  counter: 0,
-  savedCounters: [],
-};
+import { combineEpics } from 'redux-observable';
+import { combineReducers } from 'redux';
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case 'ADD_COUNTER':
-      return {
-        ...state,
-        counter: state.counter + action.value,
-      };
+import authorizationReducer, { authorizationEpic } from './authorization/authorization.reducer';
+import searchReducer, { searchEpic } from './search/search.reducer';
 
-    case 'SUB_COUNTER':
-      return {
-        ...state,
-        counter: state.counter - action.value,
-      };
+export const rootEpic = combineEpics(
+  authorizationEpic,
+  searchEpic,
+);
 
-    case 'SAVE_COUNTER':
-      return {
-        ...state,
-        counter: 0,
-        savedCounters: [
-          ...state.savedCounters,
-          action.value,
-        ],
-      };
-
-    default:
-      return state;
-  }
-}
+export default combineReducers({
+  authorization: authorizationReducer,
+  search: searchReducer,
+});
