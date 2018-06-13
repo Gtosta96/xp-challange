@@ -1,0 +1,4 @@
+:global {
+	@import url('./global.css');
+	@import url('./reset.css');
+}
