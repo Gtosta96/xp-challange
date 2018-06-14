@@ -1,5 +1,4 @@
 import { applyMiddleware } from 'redux';
-// import { routerMiddleware } from 'react-router-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -16,7 +15,6 @@ const defaultMiddlewares = [
 export default function configureMiddlewares() {
   const middlewares = applyMiddleware(...[
     ...defaultMiddlewares,
-    // routerMiddleware(history),
   ]);
 
   return isProduction ? middlewares : composeWithDevTools(middlewares);

@@ -38,7 +38,7 @@ export function getAuthorizationFail(payload) {
 
 export function authorizationEpic(action$, store, { ajax, Observable, apiUrl }) {
   return action$.ofType(HTTP_GET_AUTHORIZATION)
-    .mergeMap(() => ajax.get(`${apiUrl.authorization}?client_id=e1b64e07e993491f9904ac5f44876dfa&response_type=code`)
+    .mergeMap(() => ajax.get(`${apiUrl.authorization}?client_id=e1b64e07e993491f9904ac5f44876dfa&response_type=code&redirect_uri=http://localhost:8080/callback`)
       .map((response) => getAuthorizationSuccess(response))
       .catch((error) => Observable.of(getAuthorizationFail(error.response))),
     );
