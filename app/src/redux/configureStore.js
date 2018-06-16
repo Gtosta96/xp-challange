@@ -11,12 +11,12 @@ export default function configureStore() {
     middlewares,
   );
 
-  if (module.hot) {
-    module.hot.accept('./modules', () => {
-      const nextRootReducer = window.require('./modules/index').default;
-      store.replaceReducer(nextRootReducer);
-    });
-  }
+  // if (module.hot) {
+  //   module.hot.accept('./modules', () => {
+  //     const nextRootReducer = window.require('./modules/index').default;
+  //     store.replaceReducer(nextRootReducer);
+  //   });
+  // }
 
   return store;
 }

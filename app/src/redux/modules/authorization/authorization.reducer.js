@@ -1,19 +1,19 @@
-const HTTP_GET_AUTHORIZATION = 'xp-challange-frontend/authorization/HTTP_GET_AUTHORIZATION';
-const HTTP_GET_AUTHORIZATION_SUCCESS = 'xp-challange-frontend/authorization/HTTP_GET_AUTHORIZATION_SUCCESS';
-const HTTP_GET_AUTHORIZATION_FAIL = 'xp-challange-frontend/authorization/HTTP_GET_AUTHORIZATION_FAIL';
+const SAVE_AUTHORIZATION_DATA = 'xp-challange-frontend/authorization/SAVE_AUTHORIZATION_DATA';
 
-const initialState = {};
+const initialState = {
+  accessToken: null,
+  tokenType: null,
+  expires_in: null,
+};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case HTTP_GET_AUTHORIZATION_SUCCESS:
+    case SAVE_AUTHORIZATION_DATA:
       return {
         ...state,
-      };
-
-    case HTTP_GET_AUTHORIZATION_FAIL:
-      return {
-        ...state,
+        accessToken: action.payload.access_token,
+        tokenType: action.payload.token_type,
+        expiresIn: action.payload.expires_in,
       };
 
     default:
@@ -24,22 +24,6 @@ export default function reducer(state = initialState, action) {
 /*
 * Actions / Epics
 */
-export function getAuthorization(payload) {
-  return ({ type: HTTP_GET_AUTHORIZATION, payload });
-}
-
-export function getAuthorizationSuccess(payload) {
-  return ({ type: HTTP_GET_AUTHORIZATION_SUCCESS, payload });
-}
-
-export function getAuthorizationFail(payload) {
-  return ({ type: HTTP_GET_AUTHORIZATION_FAIL, payload });
-}
-
-export function authorizationEpic(action$, store, { ajax, Observable, apiUrl }) {
-  return action$.ofType(HTTP_GET_AUTHORIZATION)
-    .mergeMap(() => ajax.get(`${apiUrl.authorization}?client_id=e1b64e07e993491f9904ac5f44876dfa&response_type=code&redirect_uri=http://localhost:8080/callback`)
-      .map((response) => getAuthorizationSuccess(response))
-      .catch((error) => Observable.of(getAuthorizationFail(error.response))),
-    );
+export function saveAuthorizationData(payload) {
+  return ({ type: SAVE_AUTHORIZATION_DATA, payload });
 }

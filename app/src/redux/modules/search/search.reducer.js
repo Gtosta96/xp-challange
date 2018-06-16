@@ -36,9 +36,17 @@ export function searchFail(payload) {
   return ({ type: HTTP_SEARCH_FAIL, payload });
 }
 
-export function searchEpic(action$, store, { ajax, Observable, apiUrl }) {
+export function searchEpic(action$, { getState }, { Observable, apiUrl }) {
   return action$.ofType(HTTP_SEARCH)
-    .mergeMap((action) => ajax.get(`${apiUrl.search}?q=${action.payload}&type=album`)
+    .debounceTime(1000)
+    .distinctUntilChanged()
+    .mergeMap((action) => Observable.fromPromise(
+      fetch(`${apiUrl.search}?q=${action.payload}&type=album`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${getState().authorization.accessToken}` },
+      })
+        .then((response) => response.json()),
+    )
       .map((response) => searchSuccess(response))
       .catch((error) => Observable.of(searchFail(error.response))),
     );
