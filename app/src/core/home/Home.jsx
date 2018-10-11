@@ -1,11 +1,14 @@
 import React from 'react';
 
 import SearchContainer from '../search/SearchContainer';
+import AlbumContainer from '../album/AlbumContainer';
 
-const Home = (props) => (
-  <div>
+import styles from './Home.css';
+
+const Home = () => (
+  <div className={styles.home}>
     <SearchContainer />
-    <div>Home</div>
+    <AlbumContainer />
   </div>
 );
 

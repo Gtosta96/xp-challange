@@ -2,4 +2,6 @@ debug.log
 yarn-error.log
 npm-debug.log
 
+.env
+
 node_modules

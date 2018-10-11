@@ -3,17 +3,18 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const config = {
+  devtool: 'inline-source-map',
   entry: path.join(__dirname, '/app/index.js'),
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         enforce: 'pre',
         loader: 'eslint-loader',
         exclude: /node_modules/,
-        options: { failOnWarning: false, failOnError: false },
+        options: { emitWarning: true },
       }, {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
       }, {

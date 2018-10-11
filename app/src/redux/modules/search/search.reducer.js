@@ -2,13 +2,23 @@ const HTTP_SEARCH = 'xp-challange-frontend/search/HTTP_SEARCH';
 const HTTP_SEARCH_SUCCESS = 'xp-challange-frontend/search/HTTP_SEARCH_SUCCESS';
 const HTTP_SEARCH_FAIL = 'xp-challange-frontend/search/HTTP_SEARCH_FAIL';
 
-const initialState = {};
+const initialState = {
+  query: 'Ariana Grande',
+  items: [],
+};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case HTTP_SEARCH:
+      return {
+        ...state,
+        query: action.payload,
+      };
+
     case HTTP_SEARCH_SUCCESS:
       return {
         ...state,
+        items: action.payload.albums.items,
       };
 
     case HTTP_SEARCH_FAIL:

@@ -14,6 +14,10 @@ class SearchContainer extends PureComponent {
     this.onChange = this.onChange.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.query) this.props.search(this.props.query);
+  }
+
   onChange(event) {
     this.props.search(event.target.value);
   }
@@ -23,21 +27,25 @@ class SearchContainer extends PureComponent {
       <Search
         hint="Busque por artistas, álbuns ou músicas"
         placeholder="Comece a escrever..."
+        query={this.props.query}
         onChange={this.onChange}
       />
     );
   }
 }
 
-SearchContainer.defaultProps = {};
+SearchContainer.defaultProps = {
+  query: null,
+};
 
 SearchContainer.propTypes = {
   search: PropTypes.func.isRequired,
+  query: PropTypes.string,
 };
 
-const mapStateToProps = (state) => (
-  state
-);
+const mapStateToProps = (state) => ({
+  query: state.search.query,
+});
 
 const mapDispatchToProps = ({
   search,

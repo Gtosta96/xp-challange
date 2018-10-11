@@ -3,4 +3,14 @@ import ReactDOM from 'react-dom';
 
 import Root from './src/Root';
 
-ReactDOM.render(<Root />, document.getElementById('app')); // eslint-disable-line react/jsx-filename-extension
+const render = (RootComponent) => {
+  ReactDOM.render(React.createElement(RootComponent), document.getElementById('app'));
+};
+
+render(Root);
+
+if (module.hot) {
+  module.hot.accept('./src/Root', () => {
+    render(window.require('./src/Root'));
+  });
+}

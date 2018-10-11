@@ -1,0 +1,30 @@
+.album {
+  display: flex;
+  flex-flow: row wrap;
+  color: white;
+}
+
+.feedback {
+  width: 100%;
+}
+
+.figure {
+  flex: 1 0 25%;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.image {
+  width: 250px;
+  height: 250px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

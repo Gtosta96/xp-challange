@@ -1,22 +1,17 @@
 import { createStore } from 'redux';
 
-import rootReducer from './modules/index';
+import rootReducer from './modules';
 import configureMiddlewares from './middlewares';
 
+const middlewares = configureMiddlewares();
+const store = createStore(rootReducer, middlewares);
+
 export default function configureStore() {
-  const middlewares = configureMiddlewares();
-
-  const store = createStore(
-    rootReducer,
-    middlewares,
-  );
-
-  // if (module.hot) {
-  //   module.hot.accept('./modules', () => {
-  //     const nextRootReducer = window.require('./modules/index').default;
-  //     store.replaceReducer(nextRootReducer);
-  //   });
-  // }
+  if (module.hot) {
+    module.hot.accept('./modules', () => {
+      store.replaceReducer(window.require('./modules'));
+    });
+  }
 
   return store;
 }

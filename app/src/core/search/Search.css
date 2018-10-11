@@ -1,0 +1,19 @@
+.search {
+  display: flex;
+  flex-direction: column;
+}
+
+.hint {
+  color: #FAFAFA;
+  font-size: 16px;
+}
+
+.input {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  height: 60px;
+  font-size: 2rem;
+  color: white;
+  border-bottom: 1px solid white;
+}
