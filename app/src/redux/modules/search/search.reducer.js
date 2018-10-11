@@ -1,3 +1,8 @@
+import { ofType } from 'redux-observable';
+
+import { of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, mergeMap, map, catchError } from 'rxjs/operators';
+
 const HTTP_SEARCH = 'xp-challange-frontend/search/HTTP_SEARCH';
 const HTTP_SEARCH_SUCCESS = 'xp-challange-frontend/search/HTTP_SEARCH_SUCCESS';
 const HTTP_SEARCH_FAIL = 'xp-challange-frontend/search/HTTP_SEARCH_FAIL';
@@ -24,6 +29,7 @@ export default function reducer(state = initialState, action) {
     case HTTP_SEARCH_FAIL:
       return {
         ...state,
+        items: initialState.items,
       };
 
     default:
@@ -46,18 +52,17 @@ export function searchFail(payload) {
   return ({ type: HTTP_SEARCH_FAIL, payload });
 }
 
-export function searchEpic(action$, { getState }, { Observable, apiUrl }) {
-  return action$.ofType(HTTP_SEARCH)
-    .debounceTime(1000)
-    .distinctUntilChanged()
-    .mergeMap((action) => Observable.fromPromise(
-      fetch(`${apiUrl.search}?q=${action.payload}&type=album`, {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${getState().authorization.accessToken}` },
-      })
-        .then((response) => response.json()),
-    )
-      .map((response) => searchSuccess(response))
-      .catch((error) => Observable.of(searchFail(error.response))),
-    );
+export function searchEpic(action$, state, { ajax, apiUrl }) {
+  return action$.pipe(
+    ofType(HTTP_SEARCH),
+    debounceTime(1000),
+    distinctUntilChanged(),
+    mergeMap((action) => (
+      ajax.getJSON(`${apiUrl.search}?q=${action.payload}&type=album`, { Authorization: `Bearer ${state.value.authorization.accessToken}` })
+    ).pipe(
+      map((response) => searchSuccess(response)),
+      catchError((error) => of(searchFail(error.response)),
+      )),
+    ),
+  );
 }
