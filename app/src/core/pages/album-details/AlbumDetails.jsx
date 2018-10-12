@@ -1,14 +1,18 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import AlbumCover from 'app-core/shared/album-cover/AlbumCover';
 import TrackPreview from 'app-core/shared/track-preview/TrackPreview';
+import Spotify from 'app-core/shared/spotify/Spotify';
 
 import styles from './AlbumDetails.css';
 
 const AlbumDetails = (props) => (
   <div className={styles.container}>
+    <Spotify />
+
     <AlbumCover
+      className={styles.cover}
       src={props.album.images[0].url}
       alt="Orangotango jovem pendurado em uma corda"
       details={[props.album.name, props.album.artists[0].name]}
@@ -27,6 +31,8 @@ const AlbumDetails = (props) => (
 );
 
 AlbumDetails.defaultProps = {};
-AlbumDetails.propTypes = {};
+AlbumDetails.propTypes = {
+  album: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default AlbumDetails;

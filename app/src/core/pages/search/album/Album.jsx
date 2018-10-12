@@ -6,18 +6,20 @@ import AlbumCover from 'app-core/shared/album-cover/AlbumCover';
 import styles from './Album.css';
 
 const Album = (props) => (
-  <div className={styles.album}>
+  <div className={styles.container}>
     <span className={styles.feedback}>Resultados encontrados para &quot;{props.query}&quot;</span>
 
-    {props.albums.map((album) => (
-      <button key={album.id} onClick={props.onAlbumClick(album)}>
-        <AlbumCover
-          src={album.images[0].url}
-          alt="Orangotango jovem pendurado em uma corda"
-          details={[album.name, album.artists[0].name]}
-        />
-      </button>
-    ))}
+    <div className={styles.albums}>
+      {props.albums.map((album) => (
+        <div key={album.id} className={styles.album} onClick={props.onAlbumClick(album)}>
+          <AlbumCover
+            src={album.images[0].url}
+            alt="Orangotango jovem pendurado em uma corda"
+            details={[album.name, album.artists[0].name]}
+          />
+        </div>
+      ))}
+    </div>
   </div>
 );
 

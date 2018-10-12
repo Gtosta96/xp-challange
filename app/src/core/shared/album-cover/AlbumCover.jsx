@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './AlbumCover.css';
 
 const AlbumCover = (props) => (
-  <figure className={styles.figure}>
+  <figure className={`${styles.figure} ${props.className}`}>
     <img className={styles.image} src={props.src} alt={props.alt} />
 
     {props.details && (
@@ -16,10 +16,12 @@ const AlbumCover = (props) => (
 );
 
 AlbumCover.defaultProps = {
+  className: '',
   details: null,
 };
 
 AlbumCover.propTypes = {
+  className: PropTypes.string,
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   details: PropTypes.arrayOf(PropTypes.string),

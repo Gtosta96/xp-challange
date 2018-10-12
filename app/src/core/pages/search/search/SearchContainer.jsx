@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { search } from 'app-redux/modules/search/search.reducer';
@@ -20,6 +21,7 @@ class SearchContainer extends PureComponent {
 
   onChange(event) {
     this.props.search(event.target.value);
+    this.props.history.push(`/home/${this.props.query}`);
   }
 
   render() {
@@ -51,4 +53,4 @@ const mapDispatchToProps = ({
   search,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchContainer));
