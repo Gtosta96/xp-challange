@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './Login.css';
+
 const Login = (props) => (
-  <a href={props.url}>click</a>
+  <div className={styles.container}>
+    <a href={props.url}>
+      <button className={styles.login}>Login</button>
+    </a>
+  </div>
 );
 
 Login.defaultProps = {};

@@ -3,18 +3,28 @@ const SAVE_AUTHORIZATION_DATA = 'xp-challange-frontend/authorization/SAVE_AUTHOR
 const initialState = {
   accessToken: null,
   tokenType: null,
-  expires_in: null,
+  expiresIn: null,
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SAVE_AUTHORIZATION_DATA:
+    case '@@INIT':
       return {
+        ...state,
+        ...JSON.parse(localStorage.getItem('authorization')), // TODO: fix it...
+      };
+
+    case SAVE_AUTHORIZATION_DATA: {
+      const newState = {
         ...state,
         accessToken: action.payload.access_token,
         tokenType: action.payload.token_type,
         expiresIn: action.payload.expires_in,
       };
+
+      localStorage.setItem('authorization', JSON.stringify(newState));
+      return newState;
+    }
 
     default:
       return state;

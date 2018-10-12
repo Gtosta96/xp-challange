@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "app-config/*": ["./app/src/config/*"],
+      "app-core/*": ["./app/src/core/*"],
+      "app-redux/*": ["./app/src/redux/*"]
+    }
+  },
+  "include": [
+    "app/**/*"
+  ],
+  "exclude": [
+      "node_modules",
+      "dist"
+  ]
+}

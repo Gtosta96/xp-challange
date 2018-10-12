@@ -7,20 +7,22 @@ import TrackPreview from 'app-core/shared/track-preview/TrackPreview';
 import styles from './AlbumDetails.css';
 
 const AlbumDetails = (props) => (
-  <div className={styles.album}>
+  <div className={styles.container}>
     <AlbumCover
       src={props.album.images[0].url}
       alt="Orangotango jovem pendurado em uma corda"
       details={[props.album.name, props.album.artists[0].name]}
     />
 
-    {props.album.tracks.items.map((track) => (
-      <TrackPreview
-        key={track.preview_url}
-        name={track.name}
-        sources={[{ url: track.preview_url, type: 'audio/mp3' }]}
-      />
-    ))}
+    <ul className={styles.tracks}>
+      {props.album.tracks.items.map((track) => (
+        <TrackPreview
+          key={track.preview_url}
+          name={track.name}
+          sources={[{ url: track.preview_url, type: 'audio/mp3' }]}
+        />
+      ))}
+    </ul>
   </div>
 );
 
