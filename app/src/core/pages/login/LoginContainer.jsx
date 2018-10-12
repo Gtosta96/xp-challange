@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 import { connect } from 'react-redux';
 
-import { apiUrl } from '../../config/constants';
+import { apiUrl } from 'app-config/constants';
 
 import Login from './Login';
 

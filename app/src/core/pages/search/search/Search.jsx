@@ -6,6 +6,7 @@ import styles from './Search.css';
 const Search = (props) => (
   <div className={styles.search}>
     <span className={styles.hint}>{props.hint}</span>
+
     <input
       className={styles.input}
       type="text"

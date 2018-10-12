@@ -1,13 +1,3 @@
-.album {
-  display: flex;
-  flex-flow: row wrap;
-  color: white;
-}
-
-.feedback {
-  width: 100%;
-}
-
 .figure {
   flex: 1 0 25%;
   padding: 10px;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { search } from '../../redux/modules/search/search.reducer';
+import { search } from 'app-redux/modules/search/search.reducer';
 
 import Search from './Search';
 

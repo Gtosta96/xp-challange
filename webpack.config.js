@@ -4,7 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const config = {
   devtool: 'inline-source-map',
-  entry: path.join(__dirname, '/app/index.js'),
+  entry: path.resolve(__dirname, 'app/index.js'),
   module: {
     rules: [
       {
@@ -38,12 +38,17 @@ const config = {
 
   resolve: {
     extensions: ['*', '.js', '.jsx'],
+    alias: {
+      'app-config': path.resolve(__dirname, 'app/src/config'),
+      'app-core': path.resolve(__dirname, 'app/src/core'),
+      'app-redux': path.resolve(__dirname, 'app/src/redux'),
+    },
   },
 
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.join(__dirname, '/app/index.html'),
-      filename: './index.html',
+      template: path.resolve(__dirname, 'app/index.html'),
+      filename: 'index.html',
     }),
   ],
 };

@@ -1,0 +1,9 @@
+.album {
+  display: flex;
+  flex-flow: row wrap;
+  color: white;
+}
+
+.feedback {
+  width: 100%;
+}

@@ -4,12 +4,13 @@ import { Provider } from 'react-redux';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { hot } from 'react-hot-loader';
+// import { hot } from 'react-hot-loader';
 
-import configureStore from './redux/configureStore';
+import configureStore from 'app-redux/configureStore';
 
-import LoginContainer from './core/login/LoginContainer';
-import HomeContainer from './core/home/HomeContainer';
+import LoginContainer from 'app-core/pages/login/LoginContainer';
+import SearchContainer from 'app-core/pages/search/SearchContainer';
+import AlbumDetailsContainer from 'app-core/pages/album-details/AlbumDetailsContainer';
 
 import './styles/index.css';
 
@@ -20,7 +21,9 @@ const Root = () => (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={LoginContainer} />
-        <Route path="/home" component={HomeContainer} />
+
+        <Route path="/home" component={SearchContainer} />
+        <Route path="/album/:id" component={AlbumDetailsContainer} />
       </Switch>
     </BrowserRouter>
   </Provider>

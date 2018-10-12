@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { saveAuthorizationData } from '../../redux/modules/authorization/authorization.reducer';
+import { saveAuthorizationData } from 'app-redux/modules/authorization/authorization.reducer';
 
-import Home from './Home';
+import Search from './Search';
 
-class HomeContainer extends PureComponent {
+class SearchContainer extends PureComponent {
   static parseQueryString(queryString) {
     const result = queryString
       .replace(/\?|#/, '')
@@ -27,7 +27,7 @@ class HomeContainer extends PureComponent {
 
   render() {
     return (
-      <Home url={this.constructor.spotifyURL} {...this.props} />
+      <Search url={this.constructor.spotifyURL} {...this.props} />
     );
   }
 }
@@ -40,9 +40,9 @@ const mapDispatchToProps = ({
   saveAuthorizationData,
 });
 
-HomeContainer.defaultProps = {};
+SearchContainer.defaultProps = {};
 
-HomeContainer.propTypes = {
+SearchContainer.propTypes = {
   location: PropTypes.shape({
     search: PropTypes.string,
     hash: PropTypes.string,
@@ -51,4 +51,4 @@ HomeContainer.propTypes = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

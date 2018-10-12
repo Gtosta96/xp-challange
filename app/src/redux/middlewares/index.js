@@ -3,9 +3,10 @@ import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { ajax } from 'rxjs/ajax';
-import { rootEpic } from '../modules';
 
-import { isProduction, apiUrl } from '../../config/constants';
+import { isProduction, apiUrl } from 'app-config/constants';
+
+import { rootEpic } from '../modules';
 
 const epicMiddleware = createEpicMiddleware({ dependencies: { ajax, apiUrl } });
 
