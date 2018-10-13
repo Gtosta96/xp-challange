@@ -1,11 +1,17 @@
 import { createStore } from 'redux';
+import { connectRouter } from 'connected-react-router';
 
 import rootReducer from './modules';
 import configureMiddlewares, { configureEpicMiddleware } from './middlewares';
 
-export default function configureStore() {
-  const middlewares = configureMiddlewares();
-  const store = createStore(rootReducer, middlewares);
+
+export default function configureStore(history) {
+  const middlewares = configureMiddlewares(history);
+
+  const store = createStore(
+    connectRouter(history)(rootReducer),
+    middlewares,
+  );
 
   configureEpicMiddleware();
 

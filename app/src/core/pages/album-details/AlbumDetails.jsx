@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 
 import AlbumCover from 'app-core/shared/album-cover/AlbumCover';
 import TrackPreview from 'app-core/shared/track-preview/TrackPreview';
-import Spotify from 'app-core/shared/spotify/Spotify';
 
 import styles from './AlbumDetails.css';
 
 const AlbumDetails = (props) => (
   <div className={styles.container}>
-    <Spotify />
-
     <AlbumCover
       className={styles.cover}
       src={props.album.images[0].url}

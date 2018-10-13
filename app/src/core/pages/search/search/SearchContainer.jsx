@@ -21,13 +21,12 @@ class SearchContainer extends PureComponent {
 
   onChange(event) {
     this.props.search(event.target.value);
-    this.props.history.push(`/home/${this.props.query}`);
   }
 
   render() {
     return (
       <Search
-        hint="Busque por artistas, álbuns ou músicas"
+        // hint="Busque por artistas, álbuns ou músicas"
         placeholder="Comece a escrever..."
         query={this.props.query}
         onChange={this.onChange}

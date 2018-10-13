@@ -2,13 +2,13 @@ import React, { PureComponent } from 'react';
 
 import { connect } from 'react-redux';
 
-import { apiUrl } from 'app-config/constants';
+import { apiUrl, spotifyConfig } from 'app-config/constants';
 
 import Login from './Login';
 
 class LoginContainer extends PureComponent {
   static get spotifyURL() {
-    return `${apiUrl.authorization}?client_id=e1b64e07e993491f9904ac5f44876dfa&response_type=token&redirect_uri=http://localhost:8080/home`;
+    return `${apiUrl.authorization}?client_id=${spotifyConfig.clientId}&response_type=token&redirect_uri=${spotifyConfig.redirectURI}`;
   }
 
   render() {

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import SearchContainer from './search/SearchContainer';
 import AlbumContainer from './album/AlbumContainer';
 
 const Search = () => (
-  <div>
+  <Fragment>
     <SearchContainer />
     <AlbumContainer />
-  </div>
+  </Fragment>
 );
 
 Search.defaultProps = {};

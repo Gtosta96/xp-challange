@@ -1,6 +1,5 @@
 .container {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  width: 48px;
+  color: white;
+  width: 130px;
+  height: 40px;
 }

@@ -1,5 +1,7 @@
-import { applyMiddleware } from 'redux';
+import { compose, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
+import { routerMiddleware } from 'connected-react-router';
+
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { ajax } from 'rxjs/ajax';
@@ -10,18 +12,17 @@ import { rootEpic } from '../modules';
 
 const epicMiddleware = createEpicMiddleware({ dependencies: { ajax, apiUrl } });
 
-const defaultMiddlewares = [
-  epicMiddleware,
-];
+export default function configureMiddlewares(history) {
+  const middlewares = compose(
+    applyMiddleware(
+      routerMiddleware(history),
+      epicMiddleware,
+    ),
+  );
+
+  return isProduction ? middlewares : composeWithDevTools(middlewares);
+}
 
 export function configureEpicMiddleware() {
   epicMiddleware.run(rootEpic);
-}
-
-export default function configureMiddlewares() {
-  const middlewares = applyMiddleware(...[
-    ...defaultMiddlewares,
-  ]);
-
-  return isProduction ? middlewares : composeWithDevTools(middlewares);
 }

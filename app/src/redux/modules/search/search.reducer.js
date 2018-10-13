@@ -1,7 +1,11 @@
 import { ofType } from 'redux-observable';
 
 import { of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, mergeMap, map, catchError } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, mergeMap, catchError } from 'rxjs/operators';
+
+import { push } from 'connected-react-router';
+
+import { paths } from 'app-config/constants';
 
 const HTTP_SEARCH = 'xp-challange-frontend/search/HTTP_SEARCH';
 const HTTP_SEARCH_SUCCESS = 'xp-challange-frontend/search/HTTP_SEARCH_SUCCESS';
@@ -55,14 +59,24 @@ export function searchFail(payload) {
 export function searchEpic(action$, state, { ajax, apiUrl }) {
   return action$.pipe(
     ofType(HTTP_SEARCH),
-    debounceTime(1000),
+    debounceTime(500),
     distinctUntilChanged(),
     mergeMap((action) => (
       ajax.getJSON(`${apiUrl.search}?q=${action.payload}&type=album`, { Authorization: `Bearer ${state.value.authorization.accessToken}` })
-    ).pipe(
-      map((response) => searchSuccess(response)),
-      catchError((error) => of(searchFail(error.response)),
-      )),
+    )
+      .pipe(
+        mergeMap((response) => {
+          const currentPath = window.decodeURI(window.location.pathname);
+          const nextPath = `/${paths.search}/${action.payload}`;
+
+          if (currentPath !== nextPath) {
+            return [push(nextPath), searchSuccess(response)];
+          }
+
+          return [searchSuccess(response)];
+        }),
+        catchError((error) => of(searchFail(error.response))),
+      ),
     ),
   );
 }

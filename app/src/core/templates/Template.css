@@ -1,0 +1,15 @@
+.container {
+  
+}
+
+.left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+}
+
+.right {
+  padding: 40px 40px 40px 220px;
+  width: 100%;
+}
