@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { search } from 'app-redux/modules/album-details/album-details.reducer';
+import { search, clear } from 'app-redux/modules/album-details/album-details.reducer';
 
 import AlbumDetails from './AlbumDetails';
 
@@ -12,6 +12,10 @@ class AlbumDetailsContainer extends PureComponent {
     if (!this.props.album) {
       this.props.search(this.props.match.params.id);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clear();
   }
 
   render() {
@@ -29,6 +33,7 @@ AlbumDetailsContainer.propTypes = {
   album: PropTypes.objectOf(PropTypes.any),
   match: PropTypes.objectOf(PropTypes.any).isRequired,
   search: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -37,6 +42,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = ({
   search,
+  clear,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetailsContainer);

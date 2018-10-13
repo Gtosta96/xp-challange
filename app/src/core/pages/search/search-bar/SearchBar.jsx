@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './Search.css';
+import styles from './SearchBar.css';
 
 const Search = (props) => (
   <div className={styles.search}>
-    <span className={styles.hint}>{props.hint}</span>
+    { props.hint && <span className={styles.hint}>{props.hint}</span> }
 
     <input
       className={styles.input}

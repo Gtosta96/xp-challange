@@ -7,9 +7,10 @@
   top: 0;
   left: 0;
   width: 220px;
+  padding: 30px 0 0 20px;
 }
 
 .right {
-  padding: 40px 40px 40px 220px;
+  padding: 20px 40px 20px 220px;
   width: 100%;
 }

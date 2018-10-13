@@ -3,17 +3,21 @@ import { ofType } from 'redux-observable';
 import { of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, mergeMap, map, catchError } from 'rxjs/operators';
 
-const HTTP_SEARCH = 'xp-challange-frontend/search/HTTP_GET_ALBUM';
-const HTTP_SEARCH_SUCCESS = 'xp-challange-frontend/search/HTTP_GET_ALBUM_SUCCESS';
-const HTTP_SEARCH_FAIL = 'xp-challange-frontend/search/HTTP_GET_ALBUM_FAIL';
+const CLEAR = 'xp-challange-frontend/album-details/CLEAR';
+
+const HTTP_SEARCH = 'xp-challange-frontend/album-details/HTTP_GET_ALBUM';
+const HTTP_SEARCH_SUCCESS = 'xp-challange-frontend/album-details/HTTP_GET_ALBUM_SUCCESS';
+const HTTP_SEARCH_FAIL = 'xp-challange-frontend/album-details/HTTP_GET_ALBUM_FAIL';
 
 const initialState = {
-  query: 'Ariana Grande',
   album: null,
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case CLEAR:
+      return initialState;
+
     case HTTP_SEARCH:
       return {
         ...state,
@@ -40,6 +44,10 @@ export default function reducer(state = initialState, action) {
 /*
 * Actions / Epics
 */
+export function clear() {
+  return ({ type: CLEAR });
+}
+
 export function search(payload) {
   return ({ type: HTTP_SEARCH, payload });
 }

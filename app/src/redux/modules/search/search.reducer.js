@@ -18,6 +18,16 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case '@@router/LOCATION_CHANGE':
+      if (!action.payload.location.state || action.payload.location.state.path !== paths.search) {
+        return state;
+      }
+
+      return {
+        ...state,
+        query: action.payload.location.state.query,
+      };
+
     case HTTP_SEARCH:
       return {
         ...state,
@@ -70,7 +80,7 @@ export function searchEpic(action$, state, { ajax, apiUrl }) {
           const nextPath = `/${paths.search}/${action.payload}`;
 
           if (currentPath !== nextPath) {
-            return [push(nextPath), searchSuccess(response)];
+            return [push(nextPath, { path: paths.search, query: action.payload }), searchSuccess(response)];
           }
 
           return [searchSuccess(response)];

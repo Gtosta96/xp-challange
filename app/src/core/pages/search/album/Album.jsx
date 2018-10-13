@@ -11,11 +11,12 @@ const Album = (props) => (
 
     <div className={styles.albums}>
       {props.albums.map((album) => (
-        <div key={album.id} className={styles.album} onClick={props.onAlbumClick(album)}>
+        <div key={album.id} className={styles.album} onClick={props.onClick(album)}>
           <AlbumCover
             src={album.images[0].url}
             alt="Orangotango jovem pendurado em uma corda"
-            details={[album.name, album.artists[0].name]}
+            name={album.name}
+            singer={album.artists[0].name}
           />
         </div>
       ))}
@@ -24,13 +25,13 @@ const Album = (props) => (
 );
 
 Album.defaultProps = {
-  onAlbumClick: () => {},
+  onClick: () => {},
 };
 
 Album.propTypes = {
   query: PropTypes.string.isRequired,
   albums: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onAlbumClick: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default Album;

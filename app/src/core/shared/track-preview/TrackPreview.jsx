@@ -25,11 +25,16 @@ class TrackPreview extends PureComponent {
   render() {
     return (
       <li className={styles.container}>
-        <span className={styles.controls} onClick={this.toggleAudio}>
-          <i className="material-icons">music_note</i>
-        </span>
+        <div className={styles.info}>
+          <span className={styles.controls} onClick={this.toggleAudio}>
+            <i className="material-icons">music_note</i>
+          </span>
 
-        <span>{this.props.name}</span>
+          <span>{this.props.name}</span>
+        </div>
+
+        <div className={styles.preview} />
+
         <audio ref={this.audioRef} className={styles.audio}>
           {this.props.sources.map((source) => <source key={source.url} src={source.url} type={source.type} />)}
 

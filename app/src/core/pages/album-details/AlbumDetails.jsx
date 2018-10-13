@@ -12,7 +12,8 @@ const AlbumDetails = (props) => (
       className={styles.cover}
       src={props.album.images[0].url}
       alt="Orangotango jovem pendurado em uma corda"
-      details={[props.album.name, props.album.artists[0].name]}
+      name={props.album.name}
+      singer={props.album.artists[0].name}
     />
 
     <ul className={styles.tracks}>

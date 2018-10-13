@@ -1,12 +1,22 @@
 import React, { Fragment } from 'react';
 
-import SearchContainer from './search/SearchContainer';
-import AlbumContainer from './album/AlbumContainer';
+import SearchBar from './search-bar/SearchBar';
+import Album from './album/Album';
 
-const Search = () => (
+const Search = (props) => (
   <Fragment>
-    <SearchContainer />
-    <AlbumContainer />
+    <SearchBar
+      // hint="Busque por artistas, álbuns ou músicas"
+      placeholder="Comece a escrever..."
+      query={props.query}
+      onChange={props.searchTypeHandler}
+    />
+
+    <Album
+      query={props.query}
+      albums={props.items}
+      onClick={props.albumClickHandler}
+    />
   </Fragment>
 );
 

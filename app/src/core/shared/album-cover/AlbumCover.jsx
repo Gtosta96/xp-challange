@@ -7,24 +7,23 @@ const AlbumCover = (props) => (
   <figure className={`${styles.figure} ${props.className}`}>
     <img className={styles.image} src={props.src} alt={props.alt} />
 
-    {props.details && (
-      <figcaption className={styles.details}>
-        {props.details.map((detail) => <span key={detail}>{detail}</span>)}
-      </figcaption>
-    )}
+    <figcaption className={styles.details}>
+      <span className={styles.name}>{props.name}</span>
+      <span className={styles.singer}>{props.singer}</span>
+    </figcaption>
   </figure>
 );
 
 AlbumCover.defaultProps = {
   className: '',
-  details: null,
 };
 
 AlbumCover.propTypes = {
   className: PropTypes.string,
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
-  details: PropTypes.arrayOf(PropTypes.string),
+  name: PropTypes.string.isRequired,
+  singer: PropTypes.string.isRequired,
 };
 
 export default AlbumCover;
