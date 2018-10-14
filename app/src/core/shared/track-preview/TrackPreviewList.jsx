@@ -23,7 +23,7 @@ class TrackPreviewList extends PureComponent {
       isPlaying: false,
     }));
 
-    this.setState({ tracks });
+    this.setState({ tracks }); // eslint-disable-line react/no-did-mount-set-state
   }
 
   onPlay(track) {
