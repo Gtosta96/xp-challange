@@ -58,6 +58,7 @@ SearchContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  isFetching: state.search.isFetching,
   query: state.search.query,
   items: state.search.items,
 });

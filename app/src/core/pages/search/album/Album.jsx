@@ -7,7 +7,7 @@ import styles from './Album.css';
 
 const Album = (props) => (
   <div className={styles.container}>
-    <span className={styles.feedback}>Resultados encontrados para &quot;{props.query}&quot;</span>
+    { props.query && <span className={styles.feedback}>Resultados encontrados para &quot;{props.query}&quot;</span> }
 
     <div className={styles.albums}>
       {props.albums.map((album) => (

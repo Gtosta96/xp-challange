@@ -8,10 +8,10 @@ const Search = (props) => (
     { props.hint && <span className={styles.hint}>{props.hint}</span> }
 
     <input
-      className={styles.input}
       type="text"
+      className={styles.input}
       placeholder={props.placeholder}
-      defaultValue={props.query}
+      value={props.query}
       onChange={props.onChange}
     />
   </div>

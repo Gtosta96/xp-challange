@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { search, clear } from 'app-redux/modules/album-details/album-details.reducer';
 
+import Loading from 'app-core/shared/loading/Loading';
+
 import AlbumDetails from './AlbumDetails';
 
 class AlbumDetailsContainer extends PureComponent {
@@ -19,7 +21,7 @@ class AlbumDetailsContainer extends PureComponent {
   }
 
   render() {
-    if (!this.props.album) return 'loading...';
+    if (!this.props.album) return <Loading />;
 
     return <AlbumDetails {...this.props} />;
   }

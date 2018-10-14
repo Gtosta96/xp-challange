@@ -1,10 +1,9 @@
 import { ofType } from 'redux-observable';
 
 import { of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, mergeMap, catchError } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, mergeMap, catchError, takeUntil } from 'rxjs/operators';
 
 import { push } from 'connected-react-router';
-
 import { paths } from 'app-config/constants';
 
 const HTTP_SEARCH = 'xp-challange-frontend/search/HTTP_SEARCH';
@@ -12,8 +11,9 @@ const HTTP_SEARCH_SUCCESS = 'xp-challange-frontend/search/HTTP_SEARCH_SUCCESS';
 const HTTP_SEARCH_FAIL = 'xp-challange-frontend/search/HTTP_SEARCH_FAIL';
 
 const initialState = {
-  query: 'Ariana Grande',
+  query: '',
   items: [],
+  isFetching: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -32,18 +32,22 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         query: action.payload,
+        items: initialState.items,
+        isFetching: true,
       };
 
     case HTTP_SEARCH_SUCCESS:
       return {
         ...state,
         items: action.payload.albums.items,
+        isFetching: false,
       };
 
     case HTTP_SEARCH_FAIL:
       return {
         ...state,
         items: initialState.items,
+        isFetching: false,
       };
 
     default:
@@ -85,7 +89,11 @@ export function searchEpic(action$, state, { ajax, apiUrl }) {
 
           return [searchSuccess(response)];
         }),
-        catchError((error) => of(searchFail(error.response))),
+        takeUntil(action$.pipe(ofType(HTTP_SEARCH))),
+        catchError((error) => of(
+          push(`/${paths.search}/${action.payload}`, { path: paths.search, query: action.payload }),
+          searchFail(error.response)),
+        ),
       ),
     ),
   );

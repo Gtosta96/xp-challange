@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   height: 60px;
   color: white;
   cursor: pointer;
@@ -9,6 +10,10 @@
 
 .container:hover {
   background-color: rgb(250, 250, 250, 0.2);
+}
+
+.tracks {
+  flex: 1 0 75%;
 }
 
 .info {
@@ -24,7 +29,9 @@
 .audio { display: none; }
 
 .preview {
+  position: absolute;
   width: 0px;
+  bottom: 0;
   height: 2px;
   background-color: #1ed760;
   box-shadow: 1px 0px white;
