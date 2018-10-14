@@ -1,3 +1,13 @@
+# Status Atual
+
+| Feature                      |                   Status |
+| ---------------------------- | ------------------------ |
+| Back-End                     | NOK                      |
+| FE (Arch. + Webpack + React) | OK                       |
+| Look & Feel                  | Básico (não responsivo)  |
+| Testes                       | NOK                      |
+| Req. Adic.                   | NOK                      |
+
 # Front-end Challenge
 
 ## Sobre o teste

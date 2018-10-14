@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Loading from 'app-core/shared/loading/Loading';
 
 import SearchBar from './search-bar/SearchBar';
-import Album from './album/Album';
+import Showcase from './showcase/Showcase';
 
 const Search = (props) => (
   <Fragment>
@@ -17,7 +17,7 @@ const Search = (props) => (
 
     {props.isFetching
     ? <Loading />
-    : <Album
+    : <Showcase
       query={props.query}
       albums={props.items}
       onClick={props.albumClickHandler}
@@ -32,7 +32,7 @@ Search.propTypes = {
 
   query: PropTypes.string.isRequired,
   searchTypeHandler: PropTypes.func.isRequired,
-  items: PropTypes.objectOf(PropTypes.any).isRequired,
+  items: PropTypes.arrayOf(PropTypes.any).isRequired,
   albumClickHandler: PropTypes.func.isRequired,
 };
 

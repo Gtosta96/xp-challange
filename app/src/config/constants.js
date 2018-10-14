@@ -8,11 +8,11 @@ export const paths = {
   search: 'search',
   album: 'album',
 
-  spotifyCallback: 'spotify-callback',
+  spotifyCallback: process.env.REACT_APP_SPOTIFY_CALLBACK,
 };
 
 export const spotifyConfig = {
-  clientId: 'e1b64e07e993491f9904ac5f44876dfa',
+  clientId: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
   redirectURI: `http://localhost:8080/${paths.spotifyCallback}`,
 };
 

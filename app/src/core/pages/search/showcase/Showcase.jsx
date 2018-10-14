@@ -1,11 +1,13 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import AlbumCover from 'app-core/shared/album-cover/AlbumCover';
 
-import styles from './Album.css';
+import styles from './Showcase.css';
 
-const Album = (props) => (
+const Showcase = (props) => (
   <div className={styles.container}>
     { props.query && <span className={styles.feedback}>Resultados encontrados para &quot;{props.query}&quot;</span> }
 
@@ -14,7 +16,7 @@ const Album = (props) => (
         <div key={album.id} className={styles.album} onClick={props.onClick(album)}>
           <AlbumCover
             src={album.images[0].url}
-            alt="Orangotango jovem pendurado em uma corda"
+            alt={`Album - ${props.query}`}
             name={album.name}
             singer={album.artists[0].name}
           />
@@ -24,14 +26,14 @@ const Album = (props) => (
   </div>
 );
 
-Album.defaultProps = {
+Showcase.defaultProps = {
   onClick: () => {},
 };
 
-Album.propTypes = {
+Showcase.propTypes = {
   query: PropTypes.string.isRequired,
   albums: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func,
 };
 
-export default Album;
+export default Showcase;

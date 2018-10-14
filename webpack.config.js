@@ -1,5 +1,6 @@
 const path = require('path');
 
+const Dotenv = require('dotenv-webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const config = {
@@ -54,6 +55,7 @@ const config = {
   },
 
   plugins: [
+    new Dotenv(),
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, 'app/index.html'),
       filename: 'index.html',
